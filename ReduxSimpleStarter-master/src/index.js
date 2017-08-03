@@ -1,6 +1,8 @@
 import React from 'react'; //Core library
 import ReactDOM from 'react-dom'; //ReactDOM is used when we're trying to put react stuff right into the dom
 
+const API_KEY = 'AIzaSyAYnxQ-Vv9CNkbW70QdSEBQsFC3BuqESfY';
+
 // Create a new component. This component should produce some html
 // const means: no reassignment (App won't change) {as I'd expect const to mean}
 // => is ES6 syntax used as a function definer and is equivalent to:
