@@ -19,8 +19,12 @@ class SearchBar extends Component {
 
   //This is how we initialize state in a class-based component; must be done in the constructor
   constructor(props) {
-    super(props);
+    super(props); // calls the parent constructor; can do because we extended to the parent above
 
+    //initialize state with a new object
+    // -could contain properties passed in through props
+    // we can only change state like this in our constructor;
+    //    -everywhere else must use this.setState
     this.state = { term: '' };
   }
 
@@ -38,7 +42,12 @@ class SearchBar extends Component {
     //above using arrow notation: (note: don't need separate defined event handler)
     //-don't need initial curly braces after the arrow if the arrow notation code is all on one line
     //-if have a single argument (like event), we don't need the parentheses around the parameter
-    return <input onChange={event => console.log(event.target.value)} />;
+    return (
+      <div>
+        <input onChange={event => this.setState({ term: event.target.value })} />
+        Value of the input: {this.state.term}
+      </div>
+    );  // we can use this.state.term to reference state though
   }
 
   //event handler
