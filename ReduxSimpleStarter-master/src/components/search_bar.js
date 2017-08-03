@@ -15,8 +15,21 @@ class SearchBar extends Component {
   render() {
     // necessary method needed for all class components
     // this method must also return some JSX
-    return <input />;
+    // return <input onChange={this.onInputChange} />;
+    // when writing JSX and using JS variables (like this.onInputChange) we need to wrap the variables in {}
+
+    //above using arrow notation:
+    //-don't need initial curly braces after the arrow if the arrow notation code is all on one line
+    //-if have a single argument (like event), we don't need the parentheses around the parameter
+    return <input onChange={event => console.log(event.target.value)} />;
   }
+
+  //event handler
+  //naming convention: "on{name of Element}{event to handle}"
+  // onInputChange(event) {
+  //   console.log(event.target.value);
+  // }
+
 }
 
 // When to use functional vs class component? It's challenging/dependant. Try starting with functional and, if needed, refactor into a class.
