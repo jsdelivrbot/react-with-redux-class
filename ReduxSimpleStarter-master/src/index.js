@@ -1,6 +1,8 @@
 import React from 'react'; //Core library
 import ReactDOM from 'react-dom'; //ReactDOM is used when we're trying to put react stuff right into the dom
 
+import SearchBar from './components/search_bar';  //need to do this because we created this file
+
 const API_KEY = 'AIzaSyAYnxQ-Vv9CNkbW70QdSEBQsFC3BuqESfY';
 
 // Create a new component. This component should produce some html
@@ -11,7 +13,11 @@ const App = () => {
   // HTML stuff here is actually JSX (subset of JS)
   //  allows us to write html as javascript
   //  webpack and babel will transpiling of code before it's run in browser
-  return <div>Hi!</div>;
+  return (
+    <div>
+      <SearchBar />
+    </div>
+  );
 }
 
 //what does above look like as vanilla JS?
