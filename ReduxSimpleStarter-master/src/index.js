@@ -1,4 +1,4 @@
-import React from 'react'; //Core library
+import React, { Component } from 'react'; //Core library
 import ReactDOM from 'react-dom'; //ReactDOM is used when we're trying to put react stuff right into the dom
 
 // Downwards Data Flow:
@@ -11,23 +11,42 @@ import SearchBar from './components/search_bar';  //need to do this because we c
 
 const API_KEY = 'AIzaSyAYnxQ-Vv9CNkbW70QdSEBQsFC3BuqESfY';
 
-YTSearch({key: API_KEY, term: 'surfboards'}, function(data) {
-  console.log(data);
-});
 
-// Create a new component. This component should produce some html
-// const means: no reassignment (App won't change) {as I'd expect const to mean}
-// => is ES6 syntax used as a function definer and is equivalent to:
-// const App = function() {...}
-const App = () => {
-  // HTML stuff here is actually JSX (subset of JS)
-  //  allows us to write html as javascript
-  //  webpack and babel will transpiling of code before it's run in browser
-  return (
-    <div>
-      <SearchBar />
-    </div>
-  );
+// // Create a new component. This component should produce some html
+// // const means: no reassignment (App won't change) {as I'd expect const to mean}
+// // => is ES6 syntax used as a function definer and is equivalent to:
+// // const App = function() {...}
+// const App = () => {
+//   // HTML stuff here is actually JSX (subset of JS)
+//   //  allows us to write html as javascript
+//   //  webpack and babel will transpiling of code before it's run in browser
+//   return (
+//     <div>
+//       <SearchBar />
+//     </div>
+//   );
+// }
+
+//refactor the above functional component into class component so we can use state
+class App extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = { videos: [] };
+
+    YTSearch({ key: API_KEY, term: 'surfboards' }, (videos) => {
+      this.setState({ videos });  //this is equivalent to: this.setState({ videos: videos });
+      //({ videos }) only works when the key and property name have the same name
+    });
+  }
+
+  render() {
+    return (
+      <div>
+        <SearchBar />
+      </div>
+    );
+  }
 }
 
 //what does above look like as vanilla JS?
