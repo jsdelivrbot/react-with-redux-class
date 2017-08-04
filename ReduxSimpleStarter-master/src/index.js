@@ -1,9 +1,19 @@
 import React from 'react'; //Core library
 import ReactDOM from 'react-dom'; //ReactDOM is used when we're trying to put react stuff right into the dom
 
+// Downwards Data Flow:
+// -only the most parent component should be responsible for fetching data
+// since index.js is our parent, it will handle the retrieval of youtube data from the api
+import YTSearch from 'youtube-api-search';
+
+
 import SearchBar from './components/search_bar';  //need to do this because we created this file
 
 const API_KEY = 'AIzaSyAYnxQ-Vv9CNkbW70QdSEBQsFC3BuqESfY';
+
+YTSearch({key: API_KEY, term: 'surfboards'}, function(data) {
+  console.log(data);
+});
 
 // Create a new component. This component should produce some html
 // const means: no reassignment (App won't change) {as I'd expect const to mean}
