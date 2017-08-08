@@ -9,6 +9,7 @@ import YTSearch from 'youtube-api-search';
 
 import SearchBar from './components/search_bar';  //need to do this because we created this file
 import VideoList from './components/video_list';
+import VideoDetail from './components/video_detail';
 
 const API_KEY = 'AIzaSyAYnxQ-Vv9CNkbW70QdSEBQsFC3BuqESfY';
 
@@ -35,6 +36,7 @@ class App extends Component {
 
     this.state = { videos: [] };
 
+    //Note: this method isn't instantaneous...it takes a little bit of time
     YTSearch({ key: API_KEY, term: 'surfboards' }, (videos) => {
       this.setState({ videos });  //this is equivalent to: this.setState({ videos: videos });
       //({ videos }) only works when the key and property name have the same name
@@ -42,10 +44,12 @@ class App extends Component {
   }
 
   //need to pass data from parent component App into child VideoList, which is referred to as passing props
+  //component still tries to render itself even when YTSearch is still performing, so we need to be able to handle null states
   render() {
     return (
       <div>
         <SearchBar />
+        <VideoDetail video={this.state.videos[0]} />
         <VideoList videos={this.state.videos} />
       </div>
     );

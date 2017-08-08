@@ -1,6 +1,11 @@
 import React from 'react';
 
 const VideoDetail = ({ video }) => {
+  //handle if video is null
+  if (!video) {
+    return <div>Loading...</div>;
+  }
+
   //same ES6 trick as in video_list_item
   const videoId = video.id.videoId;
   //const url = 'https://www.youtube.com/embed/' + videoId;
