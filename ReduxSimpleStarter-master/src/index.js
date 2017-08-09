@@ -1,3 +1,4 @@
+//use name of library for libraries we use
 import _ from 'lodash'; //use to throttle event calls
 import React, { Component } from 'react'; //Core library
 import ReactDOM from 'react-dom'; //ReactDOM is used when we're trying to put react stuff right into the dom
@@ -7,8 +8,8 @@ import ReactDOM from 'react-dom'; //ReactDOM is used when we're trying to put re
 // since index.js is our parent, it will handle the retrieval of youtube data from the api
 import YTSearch from 'youtube-api-search';
 
-
-import SearchBar from './components/search_bar';  //need to do this because we created this file
+//use relative paths for components/files that we created
+import SearchBar from './components/search_bar';
 import VideoList from './components/video_list';
 import VideoDetail from './components/video_detail';
 
@@ -30,11 +31,13 @@ const API_KEY = 'AIzaSyAYnxQ-Vv9CNkbW70QdSEBQsFC3BuqESfY';
 //   );
 // }
 
-//refactor the above functional component into class component so we can use state
+//refactor the above functional component into class component so we can use state (see search_bar.js for info on state and class components)
 class App extends Component {
   constructor(props) {
     super(props);
 
+    //this is component-level state, so changes only trigger this component to render
+    //redux makes this a bit different...
     this.state = {
       videos: [],
       selectedVideo: null

@@ -1,4 +1,6 @@
 //doesn't have a need for state, so we can do it as a functional component
+//Functional components are always the same and nothing ever changes with them (therefore, they don't need a state)
+//Functional components are super lightweight and super fast. Easy to get started with too.
 import React from 'react';
 import VideoListItem from './video_list_item';
 
