@@ -39,13 +39,18 @@ class App extends Component {
       selectedVideo: null
     };
 
+    this.videoSearch('surfboards');
+  }
+
+  videoSearch(term) {
+
     //Note: this method isn't instantaneous...it takes a little bit of time
-    // YTSearch({ key: API_KEY, term: 'surfboards' }, (videos) => {
+    // YTSearch({ key: API_KEY, term: term }, (videos) => {
     //   this.setState({ videos });  //this is equivalent to: this.setState({ videos: videos });
     //   //({ videos }) only works when the key and property name have the same name
     // });
 
-    YTSearch({ key: API_KEY, term: 'surfboards' }, (videos) => {
+    YTSearch({ key: API_KEY, term: term }, (videos) => {
       this.setState({
         videos: videos,
         selectedVideo: videos[0]
@@ -58,7 +63,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <SearchBar />
+        <SearchBar onSearchTermChange={term => this.videoSearch(term)} />
         <VideoDetail video={this.state.selectedVideo} />
         <VideoList
           onVideoSelect={selectedVideo => this.setState({ selectedVideo })}
