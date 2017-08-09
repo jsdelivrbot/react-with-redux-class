@@ -25,7 +25,7 @@ class SearchBar extends Component {
     // -could contain properties passed in through props
     // we can only change state like this in our constructor;
     //    -everywhere else must use this.setState
-    this.state = { term: 'Starting Value' }; //this is not a greyed out placeholder, this is the actual starting value
+    this.state = { term: '' }; //this is not a greyed out placeholder, this is the actual starting value
   }
 
 
@@ -43,16 +43,22 @@ class SearchBar extends Component {
     //-don't need initial curly braces after the arrow if the arrow notation code is all on one line
     //-if have a single argument (like event), we don't need the parentheses around the parameter
     return (
-      <div>
-        <input 
+      <div className="search-bar">
+        <input
           value={this.state.term}
-          onChange={event => this.setState({ term: event.target.value })} />
+          onChange={event => this.onInputChange(event.target.value)} />
       </div>
     );  // we can use this.state.term to reference state though
 
     //having value={this.state} make it a controlled component. Therefore, its value only changes when state changes
     // this.setState causes the input component to re-render. Because it is updating term, its value is set to the new value of term
     //when onChange is triggered, the value of the input hasn't actually changed yet. When the user typed in the input, they didn't change the value, they only triggered the event.
+
+  }
+
+  onInputChange(term) {
+    this.setState({ term });
+    this.props.onSearchTermChange(term);
   }
 
   //event handler
