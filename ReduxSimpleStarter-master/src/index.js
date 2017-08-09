@@ -34,12 +34,22 @@ class App extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { videos: [] };
+    this.state = {
+      videos: [],
+      selectedVideo: null
+    };
 
     //Note: this method isn't instantaneous...it takes a little bit of time
+    // YTSearch({ key: API_KEY, term: 'surfboards' }, (videos) => {
+    //   this.setState({ videos });  //this is equivalent to: this.setState({ videos: videos });
+    //   //({ videos }) only works when the key and property name have the same name
+    // });
+
     YTSearch({ key: API_KEY, term: 'surfboards' }, (videos) => {
-      this.setState({ videos });  //this is equivalent to: this.setState({ videos: videos });
-      //({ videos }) only works when the key and property name have the same name
+      this.setState({
+        videos: videos,
+        selectedVideo: videos[0]
+      });
     });
   }
 
@@ -49,12 +59,17 @@ class App extends Component {
     return (
       <div>
         <SearchBar />
-        <VideoDetail video={this.state.videos[0]} />
-        <VideoList videos={this.state.videos} />
+        <VideoDetail video={this.state.selectedVideo} />
+        <VideoList
+          onVideoSelect={selectedVideo => this.setState({ selectedVideo })}
+          videos={this.state.videos} />
       </div>
     );
   }
 }
+//passing onVideoSelect means we're passing a function that updates another property
+//onVideoSelect is treated as a callback function, that both video_list and video_list_item will use
+//It's rare to pass a callback function more than 2 levels deep, though. You usually only want small communication b/w parent and child (and maybe grandchild). If you need more steps, you may want to think of a different approach. This works for our purposes though.
 
 //what does above look like as vanilla JS?
 // var _temporalUndefined = {};

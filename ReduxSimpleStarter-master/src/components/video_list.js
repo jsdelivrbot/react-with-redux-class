@@ -8,7 +8,12 @@ const VideoList = (props) => {
 
   //try to stay away from for loops. Use mapping method instead:
   const videoItems = props.videos.map((video) => {
-    return <VideoListItem key={video.etag} video={video} />
+    return (
+      <VideoListItem
+        onVideoSelect={props.onVideoSelect}
+        key={video.etag}
+        video={video} />
+    );
   }); // Can use our API response to find and use an appropriate key
 
   //React is smart. It sees this array we want to render and knows it, but thinks it could be a list instead. It has logic built in to efficiently render a List. React wants us to have a "key" value for each prop so it can easily lookup in our List if needed. Otherwise, it needs to destroy the entire list and build it back up again with any changes
