@@ -1,3 +1,4 @@
+import _ from 'lodash'; //use to throttle event calls
 import React, { Component } from 'react'; //Core library
 import ReactDOM from 'react-dom'; //ReactDOM is used when we're trying to put react stuff right into the dom
 
@@ -61,9 +62,12 @@ class App extends Component {
   //need to pass data from parent component App into child VideoList, which is referred to as passing props
   //component still tries to render itself even when YTSearch is still performing, so we need to be able to handle null states
   render() {
+
+    const videoSearch = _.debounce((term) => { this.videoSearch(term) }, 300);
+
     return (
       <div>
-        <SearchBar onSearchTermChange={term => this.videoSearch(term)} />
+        <SearchBar onSearchTermChange={videoSearch} />
         <VideoDetail video={this.state.selectedVideo} />
         <VideoList
           onVideoSelect={selectedVideo => this.setState({ selectedVideo })}
@@ -75,6 +79,11 @@ class App extends Component {
 //passing onVideoSelect means we're passing a function that updates another property
 //onVideoSelect is treated as a callback function, that both video_list and video_list_item will use
 //It's rare to pass a callback function more than 2 levels deep, though. You usually only want small communication b/w parent and child (and maybe grandchild). If you need more steps, you may want to think of a different approach. This works for our purposes though.
+//
+//SearchBar before using debounce method:
+//<SearchBar onSearchTermChange={term => this.videoSearch(term)} />
+//debounce returns a new function from the passed in one that can only be called every # of milliseconds, where # is the second argument passed in (the function to throttle is the first parameter)
+//Google uses something similar for its search bar
 
 //what does above look like as vanilla JS?
 // var _temporalUndefined = {};
