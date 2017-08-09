@@ -43,8 +43,8 @@ class SearchBar extends Component {
     //-don't need initial curly braces after the arrow if the arrow notation code is all on one line
     //-if have a single argument (like event), we don't need the parentheses around the parameter
     return (
-      <div>
-        <input 
+      <div className="search-bar">
+        <input
           value={this.state.term}
           onChange={event => this.setState({ term: event.target.value })} />
       </div>
