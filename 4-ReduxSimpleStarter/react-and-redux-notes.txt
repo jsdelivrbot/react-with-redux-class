@@ -1,0 +1,80 @@
+Redux
+
+-is a predictable state container for JS applications
+-relies on a lot of packages on the side (which fall in and out)
+
+What is Redux?
+-our app is separated into two parts:
+	-data contained in the applications
+		-exs:
+			-list of items
+			-a selected item
+	-views contained in the application
+		-exs:
+			-List view
+			-Detail view
+			-List item
+
+-Redux is the data contained inside the application, React is the views contained inside the application
+-When Redux says it is a predictable state container, it means that it is a collection of all the data that describes the app. This includes the hard data as well as meta-level properties (like currently selected book)
+	-React takes this data and displays it in views
+	
+-Redux is different because we centralize all the app's data inside a single object, which we refer to as the state.
+	-This is application level state (not React's component level state)
+	
+Counter example:
+	-clicking the up or down arrow updates an on screen number by 1
+	
+	-Data side:
+		-Current count
+		
+	-View side:
+		-current count view
+		-number changer view
+		
+
+*One of the most important things to creating a Redux application is figuring out how to design your state*
+
+More complicated example:
+	-Tinder
+	
+	-Data side:
+		-Users (assumed to contain images and chat logs)
+		-List of users to be reviews (part of swipe screen)
+		-Currently viewed User for image swiping (part of swipe screen)
+		-List of current users with a conversation (matched users screen)
+		-Currently viewed conversation (conversation screen)
+	
+	-View side:
+		-Image Card
+		-Like/Dislike button
+		-ConversationList (list of open conversations)
+		-TextItem (individual message)
+		-TextList (list of chat messages)
+		
+		
+Reducers:
+-a function that returns a piece of application state
+-because our application can have different pieces of state, we can have many reducers
+
+Container:
+-a container is a react component that has a direct connection to the application state managed by Redux
+-is a component that is aware of the state that is contained by Redux
+-also called a Smart Component in Redux docs
+
+When to use a container and when to use a normal(dumb) component?
+	-it varies
+	-in general, we want the most parent component that cares about a particular piece of state to be a container
+	-we should only create containers if they care about a particular piece of state
+	-also only the most parent component that uses the particular piece of state needs to be connected to Redux
+	
+	
+Actions and Action Creators
+-an action creator is a function that returns an object which is referred to as an action
+	-the action has a type (describes the type of action that was triggered) and some data that further describes the action.
+-that action is then automatically sent to all of our reducers
+	-usually set up a switch statement inside each reducer so we can go to a different line of code based on the action type
+-The reducers can choose, depending on the action, to return a different piece of state, depending on what the action is.
+	-If it doesn't care about the action, it can just return its default state (ie. do nothing).
+-That piece of state is then piped into the application state, which gets put back into our react application, causing our components to re-render
+	-whatever is returned from the reducer is our new active state
