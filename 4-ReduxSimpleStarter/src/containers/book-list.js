@@ -14,7 +14,12 @@ class BookList extends Component {
     //we want to get this list of books to show up in our container
     return this.props.books.map((book) => {
       return (
-        <li key={book.title} className="list-group-item">{book.title}</li>
+        <li
+          key={book.title}
+          onClick={() => this.props.selectBook(book)}
+          className="list-group-item">
+          {book.title}
+        </li>
       );
     });
   }
@@ -38,11 +43,17 @@ function mapStateToProps(state) {
 }
 //whenever our application state changes, this returned container will instantly re-render with a new list of books
 
+// Anything returned from this function will end up as props on the BookList container
+// so now, inside our container, we can call this.props.selectBook ("selectBook" matches the key in the bindActionCreators line (green text))
 function mapDispatchToProps(dispatch) {
+  // Whenever selectBook is called, the result should be passed to all of our reducers
+  // the dispatch function acts like a funnel to disperse the actions to all the reducers
   return bindActionCreators({ selectBook: selectBook }, dispatch);
+  // remember, selectBook (blue text) is just a function that returns an object, we need to do the above so it gets sent to all of our reducers (because those are the only things that actually care about selectBook)
 }
 
-//the connect function will take a function and a component and return a container
+//the connect function will take a function(s) and a component and return a container
 //this is what we want to export, so we move the export default down here
 export default connect(mapStateToProps, mapDispatchToProps)(BookList);
 //whenever the application state changes, the object in the state function will be assigned as props to the component 
+//we promote BookList from a component to a container as it needs to know about this new dispatch method, selectBook. We need to make it available as a prop.
