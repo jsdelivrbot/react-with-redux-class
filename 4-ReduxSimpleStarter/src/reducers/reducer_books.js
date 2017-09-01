@@ -5,9 +5,9 @@
 
 export default function () {
   return [
-    { title: 'Javascript: The Good Parts' },
-    { title: 'Harry Potter and the Prizoner of Azkaban' },
-    { title: 'A Song of Fire and Ice' },
-    { title: 'Needful Things' },
+    { title: 'Javascript: The Good Parts', pages: 101 },
+    { title: 'Harry Potter and the Prizoner of Azkaban', pages: 420 },
+    { title: 'A Song of Fire and Ice', pages: 3012 },
+    { title: 'Needful Things', pages: 604 },
   ];
 }
