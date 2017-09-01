@@ -11,6 +11,8 @@ export default function (state = null, action) {
   switch (action.type) {
     case 'BOOK_SELECTED':
       return action.payload;
+
+    //Redux likes to do a few actions on start up that would go through here, so if we start with state = null, we're not going to have a default state that's defined, which can cause some problems.
   }
 
   return state;
